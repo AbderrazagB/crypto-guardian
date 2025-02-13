@@ -88,14 +88,15 @@
   align-items: flex-start;
   margin-bottom: 1rem;
   gap: 8px;
+  width: 100%;
 }
 
 .userMessage {
-  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
 
 .botMessage {
-  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .messageBubble {
@@ -111,14 +112,16 @@
   background-color: #64FFDA;
   color: #1a1b1e;
   border-top-right-radius: 4px;
-  margin-right: 8px;
+  margin-left: 8px;
+  order: 1;
 }
 
 .botBubble {
   background-color: rgba(42, 43, 46, 0.9);
   color: #e0e0e0;
   border-top-left-radius: 4px;
-  margin-left: 8px;
+  margin-right: 8px;
+  order: 1;
 }
 
 .botAvatar {
@@ -132,6 +135,7 @@
 
 .userAvatar {
   color: #64FFDA;
+  order: 2;
 }
 
 .inputContainer {

@@ -4,30 +4,50 @@ import axios from 'axios';
 import styles from './styles/Chatbot.module.css';
 import MessageBubble from './ChatBot/MessageBubble';
 import logo from '../assets/logo.svg';
+import API_CONFIG from '../config/api.js';
 
 const Chatbot = () => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState('');
   const [conversation, setConversation] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleShow = () => setShow(!show);
 
   const sendMessage = async () => {
-    if (!message.trim()) return;
+    if (!message.trim() || isLoading) return;
 
+    setIsLoading(true);
     setConversation((prev) => [...prev, { sender: 'user', text: message }]);
+    const userMessage = message;
     setMessage('');
 
     try {
-      const response = await axios.post('YOUR_LLM_API_ENDPOINT', { message });
-      const botMessage = { sender: 'bot', text: response.data.reply };
-      setConversation((prev) => [...prev, botMessage]);
+      const response = await axios.post(`${API_CONFIG.CHAT_API_URL}${API_CONFIG.ENDPOINTS.CHAT}`, {
+        message: userMessage
+      });
+
+      // Dummy response structure that you'll receive from your actual endpoint
+      // {
+      //   success: true,
+      //   data: {
+      //     reply: string,
+      //     context?: any // Additional context if needed
+      //   }
+      // }
+
+      setConversation((prev) => [...prev, { 
+        sender: 'bot', 
+        text: response.data.data.reply 
+      }]);
     } catch (error) {
-      console.error('Error communicating with LLM:', error);
+      console.error('Error communicating with chatbot:', error);
       setConversation((prev) => [
         ...prev,
-        { sender: 'bot', text: 'Sorry, I am unable to respond at the moment.' },
+        { sender: 'bot', text: 'Sorry, I am unable to respond at the moment. Please try again later.' },
       ]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,9 +93,14 @@ const Chatbot = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+              disabled={isLoading}
             />
-            <Button variant="primary" onClick={sendMessage}>
-              Send
+            <Button 
+              variant="primary" 
+              onClick={sendMessage}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Sending...' : 'Send'}
             </Button>
           </InputGroup>
         </Offcanvas.Body>

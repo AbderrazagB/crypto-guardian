@@ -33,10 +33,11 @@
   flex: 1;
   min-height: 400px;
   width: 100%;
-  background: rgba(26, 27, 30, 0.9);
-  border: 1px solid rgba(100, 255, 218, 0.2);
-  border-radius: 10px;
+  background-color: rgba(26, 27, 30, 0.7);
+  border-radius: 12px;
   padding: 20px;
+  margin: 20px 0;
+  border: 1px solid rgba(100, 255, 218, 0.2);
   position: relative;
 }
 
@@ -46,21 +47,50 @@
   transition: all 0.3s ease;
 }
 
-.loadingMessage,
-.errorMessage {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #64FFDA;
-  font-size: clamp(1rem, 1.5vw, 1.1rem);
+.loadingContainer,
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  color: #e0e0e0;
+  font-size: 1.1rem;
   text-align: center;
-  text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+  background-color: rgba(26, 27, 30, 0.7);
+  border-radius: 12px;
+  border: 1px solid rgba(100, 255, 218, 0.2);
 }
 
-.errorMessage {
-  color: #ff4d4d;
-  text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+.errorContainer {
+  color: #FF6B6B;
+}
+
+.metricsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric span:first-child {
+  color: #64FFDA;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.metric span:last-child {
+  color: #e0e0e0;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
@@ -71,10 +101,24 @@
 
   .chartContainer {
     padding: 15px;
+    margin: 15px 0;
     min-height: 350px;
   }
 
   .chartTitle {
     margin-bottom: 15px;
+  }
+
+  .metricsContainer {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .metric {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20px;
   }
 }
