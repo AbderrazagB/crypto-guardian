@@ -8,6 +8,7 @@
 .trackerCard,
 .chartCard {
   height: 100%;
+  min-height: 600px;
   background-color: #1a1b1e !important;
   border: 1px solid #2a2b2e !important;
   border-radius: 10px;
@@ -17,11 +18,13 @@
 .chartBody {
   height: calc(100% - 50px);
   padding: 0;
+  min-height: 550px;
 }
 
 .navTabs {
   border: none;
   margin-bottom: -1px;
+  padding: 0 15px;
 }
 
 .navLink {
@@ -32,6 +35,8 @@
   margin-right: 5px;
   border-radius: 5px 5px 0 0;
   transition: all 0.3s ease;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  white-space: nowrap;
 }
 
 .navLink:hover {
@@ -49,4 +54,26 @@
 .chartCard:hover {
   border-color: var(--accent-blue) !important;
   box-shadow: 0 0 15px rgba(100, 255, 218, 0.15);
+}
+
+@media (max-width: 768px) {
+  .analysisContainer {
+    padding: 10px;
+  }
+
+  .chartCard {
+    min-height: 500px;
+  }
+
+  .chartBody {
+    min-height: 450px;
+  }
+
+  .navTabs {
+    padding: 0 10px;
+  }
+
+  .navLink {
+    padding: 8px 15px;
+  }
 }

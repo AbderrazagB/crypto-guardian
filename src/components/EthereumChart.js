@@ -114,12 +114,16 @@ const EthereumChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
         labels: { 
           color: '#e0e0e0',
-          font: { size: 12 }
+          font: { 
+            size: 12,
+            family: "'Poppins', sans-serif"
+          }
         }
       },
       tooltip: {
@@ -136,7 +140,8 @@ const EthereumChart = () => {
         color: '#e0e0e0',
         font: {
           size: 16,
-          weight: '600'
+          weight: '600',
+          family: "'Poppins', sans-serif"
         }
       },
     },
@@ -150,7 +155,10 @@ const EthereumChart = () => {
           color: '#e0e0e0',
           maxRotation: 45,
           minRotation: 45,
-          font: { size: 10 }
+          font: { 
+            size: 10,
+            family: "'Poppins', sans-serif"
+          }
         }
       },
       y: {
@@ -161,27 +169,14 @@ const EthereumChart = () => {
         ticks: {
           color: '#e0e0e0',
           callback: (value) => `$${value.toFixed(2)}`,
-          font: { size: 10 }
+          font: { 
+            size: 10,
+            family: "'Poppins', sans-serif"
+          }
         }
       }
     },
   };
-
-  if (loading) {
-    return (
-      <div className={styles.chartContainer}>
-        <div className={styles.loadingMessage}>Loading price data...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.chartContainer}>
-        <div className={styles.errorMessage}>{error}</div>
-      </div>
-    );
-  }
 
   return (
     <div className={styles.chartWrapper}>
@@ -190,7 +185,13 @@ const EthereumChart = () => {
         <span className={styles.subtitleText}>AI-Powered Price Forecast</span>
       </h2>
       <div className={styles.chartContainer}>
-        {chartData && <Line data={chartData} options={options} />}
+        {loading ? (
+          <div className={styles.loadingMessage}>Loading price data...</div>
+        ) : error ? (
+          <div className={styles.errorMessage}>{error}</div>
+        ) : (
+          <Line data={chartData} options={options} />
+        )}
       </div>
     </div>
   );

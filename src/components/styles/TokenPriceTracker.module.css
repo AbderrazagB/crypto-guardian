@@ -6,6 +6,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 600px;
 }
 
 .tokenRow {
@@ -30,10 +31,9 @@
   flex-wrap: wrap;
   gap: 20px;
   padding: 15px;
-  background: rgba(42, 43, 46, 0.5);
-  border: 1px solid rgba(100, 255, 218, 0.1);
+  background: rgba(26, 27, 30, 0.9);
+  border: 1px solid rgba(100, 255, 218, 0.2);
   border-radius: 10px;
-  backdrop-filter: blur(10px);
 }
 
 .priceInfo {
@@ -44,30 +44,33 @@
 .priceInfo h3 {
   color: #64FFDA;
   margin: 0 0 15px 0;
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
   font-weight: 600;
   text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+  white-space: nowrap;
 }
 
 .currentPrice {
   display: flex;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .price {
   color: #e0e0e0;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 600;
   text-shadow: 0 0 15px rgba(224, 224, 224, 0.3);
 }
 
 .change {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   font-weight: 500;
   padding: 6px 12px;
   border-radius: 6px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
 }
 
 .positive {
@@ -84,12 +87,13 @@
 
 .selectGroup {
   min-width: 250px;
+  max-width: 100%;
 }
 
 .selectGroup label {
   color: #64FFDA;
   margin-bottom: 10px;
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 1.5vw, 0.9rem);
   font-weight: 500;
   display: block;
   text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
@@ -102,7 +106,7 @@
   border-radius: 6px;
   padding: 10px;
   width: 100%;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -144,11 +148,11 @@
   min-height: 400px;
   position: relative;
   width: 100%;
-  background: rgba(42, 43, 46, 0.5);
-  border: 1px solid rgba(100, 255, 218, 0.1);
+  background: rgba(26, 27, 30, 0.9);
+  border: 1px solid rgba(100, 255, 218, 0.2);
   border-radius: 10px;
   padding: 20px;
-  backdrop-filter: blur(10px);
+  margin-top: 20px;
 }
 
 .loadingMessage,
@@ -227,19 +231,22 @@
   cursor: not-allowed;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .trackerHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  .trackerContainer {
+    padding: 10px;
+    min-height: 500px;
   }
 
-  .tokenSelect {
-    width: 180px;
+  .trackerHeader {
+    padding: 10px;
   }
 
   .chartContainer {
+    padding: 10px;
     min-height: 300px;
+  }
+
+  .selectGroup {
+    width: 100%;
   }
 }

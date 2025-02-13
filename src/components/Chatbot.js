@@ -14,12 +14,14 @@ const Chatbot = () => {
 
   const sendMessage = async () => {
     if (!message.trim()) return;
+
     setConversation((prev) => [...prev, { sender: 'user', text: message }]);
     setMessage('');
 
     try {
       const response = await axios.post('YOUR_LLM_API_ENDPOINT', { message });
-      setConversation((prev) => [...prev, { sender: 'bot', text: response.data.reply }]);
+      const botMessage = { sender: 'bot', text: response.data.reply };
+      setConversation((prev) => [...prev, botMessage]);
     } catch (error) {
       console.error('Error communicating with LLM:', error);
       setConversation((prev) => [
@@ -58,7 +60,9 @@ const Chatbot = () => {
         <Offcanvas.Body className={styles.chatBody}>
           <div className={styles.conversationContainer}>
             {conversation.map((msg, index) => (
-              <MessageBubble key={index} message={msg} />
+              <div key={index} className={styles.messageWrapper}>
+                <MessageBubble message={msg} />
+              </div>
             ))}
           </div>
 
