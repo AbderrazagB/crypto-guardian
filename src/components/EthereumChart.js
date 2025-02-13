@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import styles from './styles/EthereumChart.module.css';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -45,7 +46,7 @@ const EthereumChart = () => {
   };
 
   return (
-    <div style={{ backgroundColor: '#1d1f28', padding: '20px', borderRadius: '8px' }}>
+    <div className={styles.chartContainer}>
       <Line data={data} options={options} />
     </div>
   );

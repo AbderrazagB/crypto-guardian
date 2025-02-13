@@ -1,44 +1,31 @@
-// CryptoNavbar.js
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
+import styles from './styles/CryptoNavbar.module.css';
 
 const CryptoNavbar = ({ activeSection, setActiveSection }) => {
   return (
-    <Navbar expand="lg" className="sticky-top" style={{ backgroundColor: '#1d1f28' }}>
+    <Navbar expand="lg" fixed="top" className={styles.navbar}>
       <Container>
-        <Navbar.Brand href="#" style={{ color: '#e0e0e0' }}>CryptoGuardian</Navbar.Brand>
-        <Nav className="ms-auto">
-          <Nav.Link
-            onClick={() => setActiveSection('ethereum')}
-            active={activeSection === 'ethereum'}
-            style={{
-              backgroundColor: activeSection === 'ethereum' ? 'transparent' : '',
-              color: activeSection === 'ethereum' ? '#00b0ff' : '#e0e0e0',
-            }}
-          >
-            Ethereum Prediction
-          </Nav.Link>
-          <Nav.Link
-            onClick={() => setActiveSection('tokens')}
-            active={activeSection === 'tokens'}
-            style={{
-              backgroundColor: activeSection === 'tokens' ? 'transparent' : '',
-              color: activeSection === 'tokens' ? '#00b0ff' : '#e0e0e0',
-            }}
-          >
-            Token Charts
-          </Nav.Link>
-          <Nav.Link
-            onClick={() => setActiveSection('news')}
-            active={activeSection === 'news'}
-            style={{
-              backgroundColor: activeSection === 'news' ? 'transparent' : '',
-              color: activeSection === 'news' ? '#00b0ff' : '#e0e0e0',
-            }}
-          >
-            Crypto News
-          </Nav.Link>
-        </Nav>
+        <Navbar.Brand href="#" className={styles.brand}>
+          CryptoGuardian
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link
+              onClick={() => setActiveSection('ethereum')}
+              className={`${styles.navLink} ${activeSection === 'ethereum' ? styles.activeLink : ''}`}
+            >
+              Ethereum Prediction
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => setActiveSection('news')}
+              className={`${styles.navLink} ${activeSection === 'news' ? styles.activeLink : ''}`}
+            >
+              Crypto News
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

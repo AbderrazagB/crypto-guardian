@@ -1,0 +1,14 @@
+.chartContainer {
+  background-color: var(--secondary-dark);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--hover-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+}
+
+.chartContainer:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}

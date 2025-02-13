@@ -1,12 +1,13 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
+import styles from './styles/Footer.module.css';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-white p-3 mt-5">
+    <footer className={styles.footer}>
       <Container>
-        <p className="mb-0 text-center">
-          &copy; {new Date().getFullYear()} Crypto Predict. All rights reserved.
+        <p className={styles.text}>
+          &copy; {new Date().getFullYear()} <span>CryptoGuardian</span>. All rights reserved.
         </p>
       </Container>
     </footer>

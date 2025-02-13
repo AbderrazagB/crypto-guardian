@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Form, InputGroup, Offcanvas } from 'react-bootstrap';
-import { FaCommentDots, FaUserCircle } from 'react-icons/fa';
+import { FaCommentDots } from 'react-icons/fa';
 import axios from 'axios';
-import botLogo from '../assets/logo.webp';
+import styles from './styles/Chatbot.module.css';
+import MessageBubble from './ChatBot/MessageBubble';
 
 const Chatbot = () => {
   const [show, setShow] = useState(false);
@@ -33,61 +34,30 @@ const Chatbot = () => {
       <Button
         variant="primary"
         onClick={handleShow}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          borderRadius: '50%',
-          width: '70px',
-          height: '70px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        className={styles.chatButton}
       >
         <FaCommentDots size={24} />
       </Button>
 
-      <Offcanvas show={show} onHide={handleShow} placement="end" backdrop={true} scroll={false} style={{ width: '400px' }}>
+      <Offcanvas 
+        show={show} 
+        onHide={handleShow} 
+        placement="end" 
+        backdrop={true} 
+        scroll={false} 
+        className={styles.chatOffcanvas}
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Neuro Doc</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <div style={{ flexGrow: 1, overflowY: 'auto', marginBottom: '10px', padding: '10px' }}>
+        <Offcanvas.Body className={styles.chatBody}>
+          <div className={styles.conversationContainer}>
             {conversation.map((msg, index) => (
-              <div
-                key={index}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: msg.sender === 'user' ? 'flex-end' : 'flex-start',
-                  marginBottom: '10px',
-                }}
-              >
-                {msg.sender === 'bot' && (
-                  <img
-                    src={botLogo}
-                    alt="Bot Logo"
-                    style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: '10px' }}
-                  />
-                )}
-                <div
-                  style={{
-                    background: msg.sender === 'user' ? '#007bff' : '#f1f1f1',
-                    color: msg.sender === 'user' ? 'white' : 'black',
-                    padding: '8px 12px',
-                    borderRadius: '10px',
-                    maxWidth: '70%',
-                  }}
-                >
-                  {msg.text}
-                </div>
-                {msg.sender === 'user' && <FaUserCircle size={40} style={{ marginLeft: '10px' }} />}
-              </div>
+              <MessageBubble key={index} message={msg} />
             ))}
           </div>
 
-          <InputGroup style={{ marginTop: 'auto', padding: '10px' }}>
+          <InputGroup className={styles.inputContainer}>
             <Form.Control
               type="text"
               placeholder="Type a message..."

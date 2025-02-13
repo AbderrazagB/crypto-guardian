@@ -1,0 +1,35 @@
+.section {
+  background-color: var(--secondary-dark);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.cardTitle {
+  color: var(--accent-blue);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.newsItem {
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.newsLink {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: block;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.newsLink:hover {
+  color: var(--accent-blue);
+  background-color: var(--hover-color);
+  transform: translateX(5px);
+  text-decoration: none;
+}
