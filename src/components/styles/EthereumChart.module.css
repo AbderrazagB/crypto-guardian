@@ -1,14 +1,54 @@
+.chartWrapper {
+  margin: 20px;
+}
+
+.chartTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.titleText {
+  color: var(--accent-blue);
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+}
+
+.subtitleText {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: normal;
+}
+
 .chartContainer {
   background-color: var(--secondary-dark);
   padding: 20px;
   border-radius: 8px;
   border: 1px solid var(--hover-color);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 20px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chartContainer:hover {
   border-color: var(--accent-blue);
   box-shadow: 0 0 15px rgba(100, 255, 218, 0.15);
   transition: all 0.3s ease;
+}
+
+.loadingMessage,
+.errorMessage {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.errorMessage {
+  color: #ff6b6b;
 }

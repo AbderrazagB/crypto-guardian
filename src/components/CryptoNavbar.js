@@ -25,6 +25,12 @@ const CryptoNavbar = ({ activeSection, setActiveSection }) => {
               Ethereum Prediction
             </Nav.Link>
             <Nav.Link
+              onClick={() => setActiveSection('tokenPriceTracker')}
+              className={`${styles.navLink} ${activeSection === 'tokenPriceTracker' ? styles.activeLink : ''}`}
+            >
+              Token Price Tracker
+            </Nav.Link>
+            <Nav.Link
               onClick={() => setActiveSection('news')}
               className={`${styles.navLink} ${activeSection === 'news' ? styles.activeLink : ''}`}
             >
