@@ -9,13 +9,22 @@ const Sidebar = () => {
     'Breaking: Major crypto hack reported',
   ];
 
+  const handleClick = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className={styles.section}>
       <h5 className={styles.cardTitle}>News Headlines</h5>
-      <ul className="list-unstyled">
+      <ul className="list-unstyled m-0 p-0">
         {headlines.map((headline, index) => (
           <li key={index} className={styles.newsItem}>
-            <a href="#" className={styles.newsLink}>
+            <a 
+              href="#" 
+              className={styles.newsLink}
+              onClick={handleClick}
+              role="button"
+            >
               {headline}
             </a>
           </li>

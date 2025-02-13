@@ -1,13 +1,19 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import styles from './styles/CryptoNavbar.module.css';
+import logo from '../assets/logo.svg';
 
 const CryptoNavbar = ({ activeSection, setActiveSection }) => {
   return (
     <Navbar expand="lg" fixed="top" className={styles.navbar}>
       <Container>
         <Navbar.Brand href="#" className={styles.brand}>
-          CryptoGuardian
+          <img
+            src={logo}
+            alt="CryptoGuardian Logo"
+            className={styles.logo}
+          />
+          <span className={`${styles.brandText} ${styles.glowText}`}>CryptoGuardian</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

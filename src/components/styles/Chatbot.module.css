@@ -17,6 +17,12 @@
   transition: all 0.3s ease;
   z-index: 1000;
   overflow: hidden;
+  box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+}
+
+.chatbotLogo {
+  width: 35px;
+  height: 35px;
 }
 
 .chatButton:hover {
@@ -28,6 +34,26 @@
   width: 400px !important;
   background-color: var(--primary-dark) !important;
   border-left: 1px solid var(--hover-color);
+}
+
+.chatHeader {
+  border-bottom: 1px solid var(--hover-color);
+  padding: 1rem;
+  background-color: var(--secondary-dark);
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--accent-blue);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.headerLogo {
+  width: 28px;
+  height: 28px;
 }
 
 .chatBody {

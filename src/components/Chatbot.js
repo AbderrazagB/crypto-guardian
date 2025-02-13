@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Form, InputGroup, Offcanvas } from 'react-bootstrap';
-import { FaCommentDots } from 'react-icons/fa';
 import axios from 'axios';
 import styles from './styles/Chatbot.module.css';
 import MessageBubble from './ChatBot/MessageBubble';
+import logo from '../assets/logo.svg';
 
 const Chatbot = () => {
   const [show, setShow] = useState(false);
@@ -36,7 +36,7 @@ const Chatbot = () => {
         onClick={handleShow}
         className={styles.chatButton}
       >
-        <FaCommentDots size={24} />
+        <img src={logo} alt="Crypto Guardian Bot" className={styles.chatbotLogo} />
       </Button>
 
       <Offcanvas 
@@ -47,8 +47,13 @@ const Chatbot = () => {
         scroll={false} 
         className={styles.chatOffcanvas}
       >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Neuro Doc</Offcanvas.Title>
+        <Offcanvas.Header closeButton className={styles.chatHeader}>
+          <Offcanvas.Title>
+            <div className={styles.titleContainer}>
+              <img src={logo} alt="Crypto Guardian Bot" className={styles.headerLogo} />
+              <span>Crypto Guardian</span>
+            </div>
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className={styles.chatBody}>
           <div className={styles.conversationContainer}>

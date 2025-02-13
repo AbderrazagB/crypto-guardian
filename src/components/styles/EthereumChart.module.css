@@ -9,6 +9,6 @@
 
 .chartContainer:hover {
   border-color: var(--accent-blue);
-  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(100, 255, 218, 0.15);
   transition: all 0.3s ease;
 }

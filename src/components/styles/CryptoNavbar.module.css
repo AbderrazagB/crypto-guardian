@@ -6,18 +6,57 @@
 }
 
 .brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0 !important;
+  transition: all 0.3s ease !important;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.5) !important;
+}
+
+.logo {
+  width: 32px !important;
+  height: 32px !important;
+  transition: filter 0.3s ease !important;
+  filter: drop-shadow(0 0 8px rgba(100, 255, 218, 0.5)) !important;
+  animation: logoGlow 2s ease-in-out infinite alternate !important;
+}
+
+@keyframes logoGlow {
+  from {
+    filter: drop-shadow(0 0 8px rgba(100, 255, 218, 0.5)) !important;
+  }
+  to {
+    filter: drop-shadow(0 0 16px rgba(100, 255, 218, 0.8)) !important;
+  }
+}
+
+.brandText {
   color: var(--accent-blue) !important;
   font-size: 1.25rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.5px !important;
-  transition: all 0.3s ease !important;
   text-transform: uppercase !important;
-  padding: 0 !important;
   line-height: 1 !important;
 }
 
-.brand:hover {
-  transform: scale(1.05);
+.glowText {
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.5) !important;
+  animation: glow 2s ease-in-out infinite alternate !important;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.5) !important;
+  }
+  to {
+    text-shadow: 0 0 20px rgba(100, 255, 218, 0.8) !important;
+  }
+}
+
+
+
+.brand:hover .brandText {
   text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
 }
 
@@ -30,13 +69,13 @@
   font-size: 0.9rem !important;
   letter-spacing: 0.5px !important;
   width: fit-content !important;
-  margin: 0 auto !important;
+  margin: 0 0.5rem !important;
 }
 
 .navLink:hover {
   color: var(--accent-blue) !important;
   background-color: var(--hover-color) !important;
-  transform: translateY(-2px);
+  box-shadow: 0 0 8px rgba(100, 255, 218, 0.2);
 }
 
 .activeLink {

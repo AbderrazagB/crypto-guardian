@@ -21,8 +21,8 @@
 }
 
 .newsCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(100, 255, 218, 0.1);
+  box-shadow: 0 0 15px rgba(100, 255, 218, 0.15);
+  border-color: var(--accent-blue) !important;
 }
 
 .newsHeader {
@@ -47,6 +47,12 @@
   margin: 0;
   font-weight: 600;
   font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.newsCard:hover .newsTitle {
+  color: var(--text-primary);
+  text-shadow: 0 0 8px rgba(100, 255, 218, 0.3);
 }
 
 .newsDate {
