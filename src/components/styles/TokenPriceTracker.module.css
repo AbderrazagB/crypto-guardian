@@ -1,6 +1,6 @@
   .trackerContainer {
   padding: 20px;
-  background-color: #1a1b1e;
+  background: transparent;
   border-radius: 10px;
   height: 100%;
   width: 100%;
@@ -29,85 +29,114 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 0 5px;
-  background-color: var(--secondary-dark) !important;
-  border-bottom: 1px solid var(--hover-color) !important;
+  padding: 15px;
+  background: rgba(42, 43, 46, 0.5);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
 }
 
 .priceInfo {
   flex: 1;
   min-width: 200px;
-  margin-bottom: 15px;
 }
 
 .priceInfo h3 {
-  color: #e0e0e0;
-  margin: 0 0 10px 0;
+  color: #64FFDA;
+  margin: 0 0 15px 0;
   font-size: 1.5rem;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
 }
 
 .currentPrice {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 15px;
 }
 
 .price {
   color: #e0e0e0;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 600;
+  text-shadow: 0 0 15px rgba(224, 224, 224, 0.3);
 }
 
 .change {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 .positive {
   color: #00ff9d;
   background-color: rgba(0, 255, 157, 0.1);
+  border: 1px solid rgba(0, 255, 157, 0.2);
 }
 
 .negative {
   color: #ff4d4d;
   background-color: rgba(255, 77, 77, 0.1);
+  border: 1px solid rgba(255, 77, 77, 0.2);
 }
 
 .selectGroup {
   min-width: 250px;
-  margin-bottom: 20px;
 }
 
 .selectGroup label {
-  color: #e0e0e0;
-  margin-bottom: 8px;
+  color: #64FFDA;
+  margin-bottom: 10px;
   font-size: 0.9rem;
+  font-weight: 500;
   display: block;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
 }
 
 .tokenSelect {
-  background-color: #2a2b2e;
+  background: rgba(26, 27, 30, 0.9);
   color: #e0e0e0;
-  border: 1px solid #3a3b3e;
-  border-radius: 5px;
-  padding: 8px;
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  border-radius: 6px;
+  padding: 10px;
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .tokenSelect:focus {
   border-color: #64FFDA;
-  box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.2);
+  box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.1);
   outline: none;
+  color: #64FFDA;
 }
 
-.tokenSelect option,
+.tokenSelect:hover {
+  border-color: #64FFDA;
+  color: #64FFDA;
+}
+
 .tokenSelect optgroup {
-  background-color: #2a2b2e;
+  background: #1a1b1e;
+  color: #64FFDA;
+  font-weight: 600;
+  padding: 8px;
+}
+
+.tokenSelect option {
+  background: #1a1b1e;
   color: #e0e0e0;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.tokenSelect option:hover,
+.tokenSelect option:focus {
+  background: rgba(100, 255, 218, 0.1);
+  color: #64FFDA;
 }
 
 .chartContainer {
@@ -115,10 +144,11 @@
   min-height: 400px;
   position: relative;
   width: 100%;
-  background-color: transparent;
-  border-radius: 8px;
-  padding: 10px;
-  transition: all 0.3s ease;
+  background: rgba(42, 43, 46, 0.5);
+  border: 1px solid rgba(100, 255, 218, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
 }
 
 .loadingMessage,
@@ -127,13 +157,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #e0e0e0;
+  color: #64FFDA;
   font-size: 1.1rem;
   text-align: center;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
 }
 
 .errorMessage {
   color: #ff4d4d;
+  text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
 }
 
 .dropdownMenu {

@@ -225,7 +225,7 @@ const TokenPriceTracker = () => {
         </div>
         <Form.Group className={styles.selectGroup}>
           <Form.Label>Select Token</Form.Label>
-          <Form.Select
+          <select
             value={selectedToken}
             onChange={(e) => setSelectedToken(e.target.value)}
             className={styles.tokenSelect}
@@ -250,7 +250,7 @@ const TokenPriceTracker = () => {
                 ))
               }
             </optgroup>
-          </Form.Select>
+          </select>
         </Form.Group>
       </div>
       <div className={styles.chartContainer}>
