@@ -1,108 +1,131 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, Form, InputGroup, Offcanvas } from 'react-bootstrap';
 import axios from 'axios';
 import styles from './styles/Chatbot.module.css';
 import MessageBubble from './ChatBot/MessageBubble';
 import logo from '../assets/logo.svg';
 import API_CONFIG from '../config/api.js';
+import { FaMicrophone } from 'react-icons/fa';
 
 const Chatbot = () => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState('');
   const [conversation, setConversation] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef(null);
 
+  useEffect(() => {
+    if ('webkitSpeechRecognition' in window) {
+      recognitionRef.current = new window.webkitSpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = 'en-US';
+
+      recognitionRef.current.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setMessage(transcript);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => setIsListening(false);
+    }
+  }, []);
+
+  const speak = (text) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 1;
+      utterance.pitch = 1;
+  
+      const voices = window.speechSynthesis.getVoices();
+      utterance.voice = 
+        voices.find(voice => voice.name.includes('Google UK English Female')) || 
+        voices.find(voice => voice.name.includes('Google US English')) ||
+        voices.find(voice => voice.lang.startsWith('en')) || 
+        voices[0];
+  
+      window.speechSynthesis.speak(utterance);
+    } else {
+      alert('Your browser does not support speech synthesis.');
+    }
+  };
+  
   const handleShow = () => setShow(!show);
 
   const sendMessage = async () => {
     if (!message.trim() || isLoading) return;
-
+  
     setIsLoading(true);
     setConversation((prev) => [...prev, { sender: 'user', text: message }]);
     const userMessage = message;
     setMessage('');
-
+  
     try {
       const response = await axios.post(`${API_CONFIG.CHAT_API_URL}${API_CONFIG.ENDPOINTS.CHAT}`, {
         message: userMessage
       });
-
-      // Dummy response structure that you'll receive from your actual endpoint
-      // {
-      //   success: true,
-      //   data: {
-      //     reply: string,
-      //     context?: any // Additional context if needed
-      //   }
-      // }
-
-      setConversation((prev) => [...prev, { 
-        sender: 'bot', 
-        text: response.data.data.reply 
-      }]);
+  
+      const botResponse = response.data.data.reply;
+      setConversation((prev) => [...prev, { sender: 'bot', text: botResponse }]);
+  
     } catch (error) {
       console.error('Error communicating with chatbot:', error);
-      setConversation((prev) => [
-        ...prev,
-        { sender: 'bot', text: 'Sorry, I am unable to respond at the moment. Please try again later.' },
-      ]);
+      const errorMessage = 'Sorry, I am unable to respond at the moment. Please try again later.';
+      setConversation((prev) => [...prev, { sender: 'bot', text: errorMessage }]);
+  
+
     } finally {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <>
-      <Button
-        variant="primary"
-        onClick={handleShow}
-        className={styles.chatButton}
-      >
-        <img src={logo} alt="Crypto Guardian Bot" className={styles.chatbotLogo} />
+      <Button onClick={handleShow} className={styles.chatButton}>
+        <img src={logo} alt="Chat" className={styles.chatbotLogo} />
       </Button>
 
-      <Offcanvas 
-        show={show} 
-        onHide={handleShow} 
-        placement="end" 
-        backdrop={true} 
-        scroll={false} 
-        className={styles.chatOffcanvas}
-      >
+      <Offcanvas show={show} onHide={handleShow} placement="end" className={styles.chatOffcanvas}>
         <Offcanvas.Header closeButton className={styles.chatHeader}>
-          <Offcanvas.Title>
-            <div className={styles.titleContainer}>
-              <img src={logo} alt="Crypto Guardian Bot" className={styles.headerLogo} />
-              <span>Crypto Guardian</span>
-            </div>
-          </Offcanvas.Title>
+          <div className={styles.titleContainer}>
+            <img src={logo} alt="CryptoGuardian Logo" className={styles.headerLogo} />
+            <span>CryptoGuardian AI</span>
+          </div>
         </Offcanvas.Header>
         <Offcanvas.Body className={styles.chatBody}>
           <div className={styles.conversationContainer}>
             {conversation.map((msg, index) => (
-              <div key={index} className={styles.messageWrapper}>
-                <MessageBubble message={msg} />
-              </div>
+              <MessageBubble key={index} message={msg} onSpeak={speak} />
             ))}
           </div>
+          <div className={styles.inputContainer}>
+            <InputGroup>
+              <Form.Control
+                placeholder="Type your message..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+              />
 
-          <InputGroup className={styles.inputContainer}>
-            <Form.Control
-              type="text"
-              placeholder="Type a message..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-              disabled={isLoading}
-            />
-            <Button 
-              variant="primary" 
-              onClick={sendMessage}
-              disabled={isLoading}
-            >
-              {isLoading ? 'Sending...' : 'Send'}
-            </Button>
-          </InputGroup>
+              <Button
+                variant="primary"
+                onClick={sendMessage}
+                disabled={isLoading}
+                title="Send message"
+              >
+                {isLoading ? '...' : 'Send'}
+              </Button>
+            </InputGroup>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
     </>

@@ -13,8 +13,6 @@ import styles from './styles/App.module.css';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState('ethereum');
-  const [ethereumPrice, setEthereumPrice] = useState(0);
-
   return (
     <div className={styles.pageWrapper}>
       <ParticlesBackground />
@@ -23,15 +21,17 @@ const App = () => {
       <main className={styles.mainContent}>
         <Container fluid>
           <Row className="g-4">
-            <Col lg={3} md={4} className="d-none d-md-block">
-              <Card className={styles.card}>
-                <Card.Body>
-                  <Sidebar ethereumPrice={ethereumPrice} />
-                </Card.Body>
-              </Card>
-            </Col>
+            {activeSection !== 'news' && (
+              <Col lg={3} md={4} className="d-none d-md-block">
+                <Card className={styles.card}>
+                  <Card.Body>
+                    <Sidebar/>
+                  </Card.Body>
+                </Card>
+              </Col>
+            )}
 
-            <Col lg={9} md={8} xs={12}>
+            <Col lg={activeSection === 'news' ? 12 : 9} md={activeSection === 'news' ? 12 : 8} xs={12}>
               <div className={styles.section}>
                 {activeSection === 'ethereum' && <EthereumChart />}
                 {activeSection === 'tokenPriceTracker' && <TokenPriceTracker />}

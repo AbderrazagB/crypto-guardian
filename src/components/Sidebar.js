@@ -1,7 +1,7 @@
   import React from 'react';
 import styles from './styles/Sidebar.module.css';
 
-const Sidebar = ({ ethereumPrice }) => {
+const Sidebar = () => {
   const headlines = [
     'ETH price predicted to surge',
     'New crypto regulations in effect',
@@ -30,7 +30,6 @@ const Sidebar = ({ ethereumPrice }) => {
           </li>
         ))}
       </ul>
-      <div className={styles.ethereumPrice}>Ethereum Price: ${ethereumPrice.toFixed(2)}</div>
     </div>
   );
 };

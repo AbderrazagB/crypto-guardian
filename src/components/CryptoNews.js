@@ -93,7 +93,6 @@ However, experts advise careful consideration of risks despite the attractive yi
                   ))}
                 </div>
                 <div className={styles.newsFooter}>
-                  <div className={styles.newsSource}>Source: {item.source}</div>
                   <div className={styles.tagContainer}>
                     {item.tags.map((tag, index) => (
                       <span key={index} className={styles.tag}>#{tag}</span>

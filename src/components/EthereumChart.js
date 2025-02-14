@@ -196,7 +196,13 @@ const EthereumChart = () => {
   };
 
   return (
+    <div className={styles.chartWrapper}>
+            <h2 className={styles.chartTitle}>
+        <span className={styles.titleText}>Ethereum Price Prediction</span>
+        <span className={styles.subtitleText}>AI-Powered Price Forecast</span>
+      </h2>
     <div className={styles.chartContainer}>
+      
       <Line options={chartOptions} data={chartData} />
       {predictionData?.metrics && (
         <div className={styles.metricsContainer}>
@@ -211,6 +217,8 @@ const EthereumChart = () => {
         </div>
       )}
     </div>
+    </div>
+
   );
 };
 
