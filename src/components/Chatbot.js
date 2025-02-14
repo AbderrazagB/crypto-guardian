@@ -5,14 +5,12 @@ import styles from './styles/Chatbot.module.css';
 import MessageBubble from './ChatBot/MessageBubble';
 import logo from '../assets/logo.svg';
 import API_CONFIG from '../config/api.js';
-import { FaMicrophone } from 'react-icons/fa';
 
 const Chatbot = () => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState('');
   const [conversation, setConversation] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
 
   useEffect(() => {
@@ -25,15 +23,11 @@ const Chatbot = () => {
       recognitionRef.current.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         setMessage(transcript);
-        setIsListening(false);
       };
 
       recognitionRef.current.onerror = (event) => {
         console.error('Speech recognition error:', event.error);
-        setIsListening(false);
       };
-
-      recognitionRef.current.onend = () => setIsListening(false);
     }
   }, []);
 
