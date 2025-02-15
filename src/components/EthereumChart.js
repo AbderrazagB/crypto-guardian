@@ -27,14 +27,13 @@ ChartJS.register(
 
 const EthereumChart = () => {
   const [historicalData, setHistoricalData] = useState([]);
-  const [predictionData, setPredictionData] = useState(null);
+  const [predictionData, setPredictionData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log('Fetching historical data from Binance...');
         const historicalResponse = await axios.get('https://api.binance.com/api/v3/klines', {
           params: {
             symbol: 'ETHUSDT',
@@ -52,27 +51,15 @@ const EthereumChart = () => {
           price: parseFloat(item[4]),
         }));
 
-        console.log('Historical data fetched successfully:', formattedHistoricalData);
         setHistoricalData(formattedHistoricalData);
 
         try {
-          // Fetch prediction data from your API
-          console.log('Fetching prediction data...');
-          const predictionResponse = await axios.get(`http://20.199.80.240:5010/predict`);
-          setPredictionData(predictionResponse.data.data);
-          console.log('Prediction data fetched successfully');
-        } catch (predictionError) {
-          console.error('Error fetching prediction data:', predictionError);
-          // Don't set error state here, we still want to show historical data
-        }
-        
+          const predictionResponse = await axios.get(`http://20.199.80.240:5020/predict`);
+          setPredictionData(predictionResponse.data.predicted_close_prices);
+        } catch {}
+
         setError(null);
       } catch (err) {
-        console.error('Error in fetchData:', err);
-        if (err.response) {
-          console.error('Response data:', err.response.data);
-          console.error('Response status:', err.response.status);
-        }
         setError(err.message || 'Failed to load data. Please try again later.');
       } finally {
         setIsLoading(false);
@@ -80,76 +67,9 @@ const EthereumChart = () => {
     };
 
     fetchData();
-    // Refresh data every 5 minutes
     const interval = setInterval(fetchData, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
-
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          color: '#e0e0e0',
-          font: {
-            size: 12,
-            family: "'Poppins', sans-serif"
-          }
-        }
-      },
-      tooltip: {
-        titleColor: '#e0e0e0',
-        bodyColor: '#e0e0e0',
-        backgroundColor: 'rgba(26, 27, 30, 0.9)',
-        callbacks: {
-          label: (context) => `$${context.parsed.y.toFixed(2)}`,
-        },
-      },
-      title: {
-        display: true,
-        text: 'Ethereum Price Prediction',
-        color: '#e0e0e0',
-        font: {
-          size: 16,
-          weight: '600',
-          family: "'Poppins', sans-serif"
-        }
-      },
-    },
-    scales: {
-      x: {
-        grid: {
-          color: 'rgba(68, 68, 68, 0.5)',
-          drawBorder: false
-        },
-        ticks: {
-          color: '#e0e0e0',
-          maxRotation: 45,
-          minRotation: 45,
-          font: {
-            size: 10,
-            family: "'Poppins', sans-serif"
-          }
-        }
-      },
-      y: {
-        grid: {
-          color: 'rgba(68, 68, 68, 0.5)',
-          drawBorder: false
-        },
-        ticks: {
-          color: '#e0e0e0',
-          callback: (value) => `$${value.toFixed(2)}`,
-          font: {
-            size: 10,
-            family: "'Poppins', sans-serif"
-          }
-        }
-      }
-    },
-  };
 
   if (isLoading) {
     return <div className={styles.loadingContainer}>Loading price data...</div>;
@@ -163,15 +83,27 @@ const EthereumChart = () => {
     return <div className={styles.errorContainer}>No price data available</div>;
   }
 
+  const lastHistoricalDate = new Date(historicalData[historicalData.length - 1].timestamp);
+  const futureDates = Array.from({ length: 7 }, (_, i) => {
+    const futureDate = new Date(lastHistoricalDate);
+    futureDate.setDate(futureDate.getDate() + (i + 1));
+    return futureDate.toLocaleDateString('en-US', { weekday: 'short' });
+  });
+
+  const chartLabels = [
+    ...historicalData.map(d => new Date(d.timestamp).toLocaleDateString('en-US', { weekday: 'short' })),
+    ...futureDates
+  ];
+
+  const historicalPrices = historicalData.map(d => d.price);
+  const predictionPrices = predictionData;
+
   const chartData = {
-    labels: [
-      ...historicalData.map(d => new Date(d.timestamp).toLocaleDateString('en-US', { weekday: 'short' })),
-      ...(predictionData?.predictions || []).map(d => new Date(d.timestamp).toLocaleDateString('en-US', { weekday: 'short' }))
-    ],
+    labels: chartLabels,
     datasets: [
       {
         label: 'Historical Price',
-        data: [...historicalData.map(d => d.price), ...Array(predictionData?.predictions?.length || 0).fill(null)],
+        data: [...historicalPrices, ...Array(predictionData.length).fill(null)],
         borderColor: '#64FFDA',
         backgroundColor: 'rgba(100, 255, 218, 0.1)',
         fill: true,
@@ -180,9 +112,9 @@ const EthereumChart = () => {
       {
         label: 'AI Prediction',
         data: [
-          ...Array(historicalData.length - 1).fill(null),
-          historicalData[historicalData.length - 1].price,
-          ...(predictionData?.predictions || []).map(d => d.price)
+          ...Array(historicalPrices.length - 1).fill(null),
+          historicalPrices[historicalPrices.length - 1],
+          ...predictionPrices
         ],
         borderColor: '#FF6B6B',
         backgroundColor: 'rgba(255, 107, 107, 0.1)',
@@ -195,28 +127,35 @@ const EthereumChart = () => {
 
   return (
     <div className={styles.chartWrapper}>
-            <h2 className={styles.chartTitle}>
+      <h2 className={styles.chartTitle}>
         <span className={styles.titleText}>Ethereum Price Prediction</span>
         <span className={styles.subtitleText}>AI-Powered Price Forecast</span>
       </h2>
-    <div className={styles.chartContainer}>
-      
-      <Line options={chartOptions} data={chartData} />
-      {predictionData?.metrics && (
-        <div className={styles.metricsContainer}>
-          <div className={styles.metric}>
-            <span>Model Accuracy:</span>
-            <span>{(predictionData.metrics.accuracy * 100).toFixed(2)}%</span>
+      <div className={styles.chartContainer}>
+        <Line options={{
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { color: '#e0e0e0', font: { size: 12, family: "'Poppins', sans-serif" } } },
+            tooltip: {
+              titleColor: '#e0e0e0', bodyColor: '#e0e0e0', backgroundColor: 'rgba(26, 27, 30, 0.9)',
+              callbacks: { label: (context) => `$${context.parsed.y.toFixed(2)}` },
+            },
+            title: { display: true, text: 'Ethereum Price Prediction', color: '#e0e0e0', font: { size: 16, weight: '600', family: "'Poppins', sans-serif" } },
+          },
+          scales: {
+            x: { grid: { color: 'rgba(68, 68, 68, 0.5)', drawBorder: false }, ticks: { color: '#e0e0e0', maxRotation: 45, minRotation: 45, font: { size: 10, family: "'Poppins', sans-serif" } } },
+            y: { grid: { color: 'rgba(68, 68, 68, 0.5)', drawBorder: false }, ticks: { color: '#e0e0e0', callback: (value) => `$${value.toFixed(2)}`, font: { size: 10, family: "'Poppins', sans-serif" } } },
+          },
+        }} data={chartData} />
+        {predictionData?.metrics && (
+          <div className={styles.metricsContainer}>
+            <div className={styles.metric}><span>Model Accuracy:</span><span>{(predictionData.metrics.accuracy * 100).toFixed(2)}%</span></div>
+            <div className={styles.metric}><span>Confidence Level:</span><span>{(predictionData.metrics.confidence * 100).toFixed(2)}%</span></div>
           </div>
-          <div className={styles.metric}>
-            <span>Confidence Level:</span>
-            <span>{(predictionData.metrics.confidence * 100).toFixed(2)}%</span>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
-    </div>
-
   );
 };
 
