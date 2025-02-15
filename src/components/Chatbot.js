@@ -4,10 +4,10 @@ import axios from 'axios';
 import styles from './styles/Chatbot.module.css';
 import MessageBubble from './ChatBot/MessageBubble';
 import logo from '../assets/logo.svg';
-import API_CONFIG from '../config/api.js';
 
 const Chatbot = () => {
   const [show, setShow] = useState(false);
+  const [context, setContext] = useState('');
   const [message, setMessage] = useState('');
   const [conversation, setConversation] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -63,11 +63,13 @@ const Chatbot = () => {
     setMessage('');
   
     try {
-      const response = await axios.post(`${API_CONFIG.CHAT_API_URL}${API_CONFIG.ENDPOINTS.CHAT}`, {
-        message: userMessage
+      const response = await axios.post("http://20.199.80.240:5010/chat", {
+        user_question: userMessage,
+        context: context
       });
   
-      const botResponse = response.data.data.reply;
+      const botResponse = response.data.chatbot_response;
+      setContext(response.data.context);
       setConversation((prev) => [...prev, { sender: 'bot', text: botResponse }]);
   
     } catch (error) {

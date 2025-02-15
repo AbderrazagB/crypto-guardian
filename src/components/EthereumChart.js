@@ -12,7 +12,6 @@ import {
   Legend,
   Filler,
 } from 'chart.js';
-import API_CONFIG from '../config/api.js';
 import styles from './styles/EthereumChart.module.css';
 
 ChartJS.register(
@@ -35,7 +34,6 @@ const EthereumChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch historical data from Binance
         console.log('Fetching historical data from Binance...');
         const historicalResponse = await axios.get('https://api.binance.com/api/v3/klines', {
           params: {
@@ -60,7 +58,7 @@ const EthereumChart = () => {
         try {
           // Fetch prediction data from your API
           console.log('Fetching prediction data...');
-          const predictionResponse = await axios.get(`${API_CONFIG.PREDICTION_API_URL}${API_CONFIG.ENDPOINTS.ETHEREUM_PREDICTION}`);
+          const predictionResponse = await axios.get(`http://20.199.80.240:5010/predict`);
           setPredictionData(predictionResponse.data.data);
           console.log('Prediction data fetched successfully');
         } catch (predictionError) {
