@@ -94,7 +94,7 @@ const Chatbot = () => {
         <Offcanvas.Header closeButton className={styles.chatHeader}>
           <div className={styles.titleContainer}>
             <img src={logo} alt="CryptoGuardian Logo" className={styles.headerLogo} />
-            <span>CryptoGuardian AI</span>
+            <span>CryptoGuardian</span>
           </div>
         </Offcanvas.Header>
         <Offcanvas.Body className={styles.chatBody}>
@@ -106,10 +106,17 @@ const Chatbot = () => {
           <div className={styles.inputContainer}>
             <InputGroup>
               <Form.Control
+                as="textarea"
                 placeholder="Type your message..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                  }
+                }}
+                style={{ overflow: 'auto', resize: 'none' }}
               />
 
               <Button

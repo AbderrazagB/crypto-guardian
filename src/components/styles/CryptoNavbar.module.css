@@ -32,7 +32,7 @@
 }
 
 .brandText {
-  color: var(--accent-blue) !important;
+  color: var(--accent-color) !important;
   font-size: 1.25rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.5px !important;
@@ -73,14 +73,14 @@
 }
 
 .navLink:hover {
-  color: var(--accent-blue) !important;
+  color: var(--accent-color) !important;
   background-color: var(--hover-color) !important;
-  box-shadow: 0 0 8px rgba(100, 255, 218, 0.2);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
 .activeLink {
-  color: var(--accent-blue) !important;
-  border: 1px solid var(--accent-blue) !important;
+  color: var(--accent-color) !important;
+  border: 1px solid var(--accent-color) !important;
   font-weight: 600 !important;
   padding: 0.5rem 1.5rem !important;
 }

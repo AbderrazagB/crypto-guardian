@@ -26,11 +26,8 @@
   border: 1px solid var(--hover-color) !important;
   border-radius: 8px;
 }
-
-/* Only apply hover effect to cards that are not in the sidebar */
 .section .card:hover {
   transform: translateY(-5px);
-  border-color: var(--accent-blue) !important;
   box-shadow: 0 4px 12px rgba(100, 255, 218, 0.1);
 }
 

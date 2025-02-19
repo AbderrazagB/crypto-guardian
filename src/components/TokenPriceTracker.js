@@ -213,7 +213,7 @@ const TokenPriceTracker = () => {
     <div className={styles.trackerContainer}>
       <div className={styles.trackerHeader}>
         <div className={styles.priceInfo}>
-          <h3>Token Price Tracker</h3>
+          <h3>Token Price</h3>
           {currentPrice && (
             <div className={styles.currentPrice}>
               <span className={styles.price}>${currentPrice.toFixed(8)}</span>

@@ -18,10 +18,7 @@
   background-color: var(--hover-color) !important;
 }
 
-.tokenRow.selected {
-  background-color: rgba(100, 255, 218, 0.1) !important;
-  border-left: 3px solid var(--accent-blue) !important;
-}
+
 
 .trackerHeader {
   margin-bottom: 20px;
@@ -31,9 +28,6 @@
   flex-wrap: wrap;
   gap: 20px;
   padding: 15px;
-  background: rgba(26, 27, 30, 0.9);
-  border: 1px solid rgba(100, 255, 218, 0.2);
-  border-radius: 10px;
 }
 
 .priceInfo {
@@ -42,7 +36,7 @@
 }
 
 .priceInfo h3 {
-  color: #64FFDA;
+  color: #FFFFFF;
   margin: 0 0 15px 0;
   font-size: clamp(1.2rem, 2vw, 1.5rem);
   font-weight: 600;
@@ -59,7 +53,7 @@
 
 .price {
   color: #e0e0e0;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.3rem, 2vw, 2rem);
   font-weight: 600;
   text-shadow: 0 0 15px rgba(224, 224, 224, 0.3);
 }
@@ -91,12 +85,11 @@
 }
 
 .selectGroup label {
-  color: #64FFDA;
+  color: #e0e0e0;
   margin-bottom: 10px;
-  font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
   font-weight: 500;
   display: block;
-  text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
 }
 
 .tokenSelect {
@@ -148,8 +141,7 @@
   min-height: 400px;
   position: relative;
   width: 100%;
-  background: rgba(26, 27, 30, 0.9);
-  border: 1px solid rgba(100, 255, 218, 0.2);
+  background: rgb(26, 27, 30);
   border-radius: 10px;
   padding: 20px;
   margin-top: 20px;

@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary-dark: #0A192F;  /* Dark blue background */
-  --secondary-dark: #112240; /* Slightly lighter blue for cards/sections */
-  --accent-blue: #64FFDA;   /* Bright accent color */
-  --text-primary: #E6F1FF;  /* Light text color */
-  --text-secondary: #8892B0; /* Secondary text color */
-  --hover-color: #233554;   /* Hover state color */
+  --primary-dark: #121212;    /* Main black background */
+  --secondary-dark: #1E1E1E;  /* Lighter black for cards/sections */
+  --accent-color: #FFFFFF;    /* White accent */
+  --text-primary: #FFFFFF;    /* Primary text */
+  --text-secondary: #A0A0A0;  /* Secondary text */
+  --hover-color: #2A2A2A;     /* Hover state */
   --font-primary: 'Space Grotesk', sans-serif;
 }
 
@@ -50,8 +50,8 @@ body {
 /* Bootstrap overrides */
 .btn-primary {
   background-color: transparent !important;
-  border-color: var(--accent-blue) !important;
-  color: var(--accent-blue) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--accent-color) !important;
 }
 
 .btn-primary:hover {
@@ -65,7 +65,8 @@ body {
 }
 
 .form-control:focus {
-  box-shadow: 0 0 0 0.2rem rgba(100, 255, 218, 0.25) !important;
+  border-radius: 5px !important;
+  box-shadow: 0 0 0 0.05rem rgba(255, 255, 255, 0.25) !important;
 }
 
 .form-control::placeholder {

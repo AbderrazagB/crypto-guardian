@@ -5,7 +5,7 @@
 }
 
 .cardTitle {
-  color: var(--accent-blue);
+  color: var(--accent-color);
   font-size: 1.25rem;
   margin-bottom: 1rem;
   font-weight: 600;
