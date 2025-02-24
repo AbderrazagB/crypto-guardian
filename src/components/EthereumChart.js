@@ -54,7 +54,7 @@ const EthereumChart = () => {
         setHistoricalData(formattedHistoricalData);
 
         try {
-          const predictionResponse = await axios.get(`http://20.199.80.240:5020/predict`);
+          const predictionResponse = await axios.get(`http://20.199.77.28:5020/predict`);
           setPredictionData(predictionResponse.data.predicted_close_prices);
         } catch {}
 

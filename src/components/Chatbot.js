@@ -63,7 +63,7 @@ const Chatbot = () => {
     setMessage('');
   
     try {
-      const response = await axios.post("http://20.199.80.240:5010/chat", {
+      const response = await axios.post("http://20.199.77.28:5010/chat", {
         user_question: userMessage,
         context: context
       });
