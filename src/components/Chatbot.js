@@ -3,7 +3,7 @@ import { Button, Form, InputGroup, Offcanvas } from 'react-bootstrap';
 import axios from 'axios';
 import styles from './styles/Chatbot.module.css';
 import MessageBubble from './ChatBot/MessageBubble';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 
 const Chatbot = () => {
   const [show, setShow] = useState(false);

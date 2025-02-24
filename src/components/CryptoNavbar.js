@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import styles from './styles/CryptoNavbar.module.css';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 
 const CryptoNavbar = ({ activeSection, setActiveSection }) => {
   return (

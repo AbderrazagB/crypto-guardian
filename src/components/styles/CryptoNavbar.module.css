@@ -15,8 +15,7 @@
 }
 
 .logo {
-  width: 32px !important;
-  height: 32px !important;
+  width: 40px !important;
   transition: filter 0.3s ease !important;
   filter: drop-shadow(0 0 8px rgba(100, 255, 218, 0.5)) !important;
   animation: logoGlow 2s ease-in-out infinite alternate !important;

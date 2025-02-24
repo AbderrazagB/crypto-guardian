@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaUserCircle, FaVolumeUp } from 'react-icons/fa';
 import styles from '../styles/Chatbot.module.css';
-import botLogo from '../../assets/logo.svg';
+import botLogo from '../../assets/logo.png';
 
 const MessageBubble = ({ message, onSpeak }) => {
   const isUser = message.sender === 'user';

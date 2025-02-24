@@ -6,7 +6,7 @@
   height: 60px;
   border-radius: 50% !important;
   padding: 0;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   background-color: var(--secondary-dark);
@@ -24,8 +24,7 @@
 }
 
 .chatbotLogo {
-  width: 35px;
-  height: 35px;
+  width: 40px;
   filter: drop-shadow(0 0 5px rgba(100, 255, 218, 0.5));
 }
 
