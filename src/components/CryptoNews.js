@@ -101,11 +101,11 @@ const CryptoNews = () => {
     <div className={styles.newsContainer}>
       <h3 className={styles.sectionTitle}>Crypto News</h3>
       {newsItems.length === 0 ? (
-        <p>No news items available.</p>
+        <p className={styles.noNews}>No news available.</p>
       ) : (
         newsItems.map((item) => (
           <Card key={item.id} className={styles.newsCard}>
-            <Card.Header className={styles.newsHeader}>
+            <Card.Header className={styles.N}>
               <div className={styles.headerContent}>
                 <div className={styles.titleSection}>
                   <h5 className={styles.newsTitle}>{item.title}</h5>

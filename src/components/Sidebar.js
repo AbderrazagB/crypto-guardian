@@ -53,7 +53,7 @@ const Sidebar = () => {
       <h5 className={styles.cardTitle}>News Headlines</h5>
       <ul className="list-unstyled m-0 p-0">
         {newsHeadlines.length === 0 ? (
-          <li>No headlines available</li>
+          <li className={styles.noNews}>No News</li>
         ) : (
           newsHeadlines.map((news) => (
             <li key={news.id} className={styles.newsItem}>

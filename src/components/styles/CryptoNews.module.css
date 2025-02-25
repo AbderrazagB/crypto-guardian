@@ -54,6 +54,11 @@
   color: var(--text-primary);
   text-shadow: 0 0 8px rgba(100, 255, 218, 0.3);
 }
+.noNews{
+  margin: auto;
+ color: white;
+ text-align: center;
+}
 
 .newsDate {
   color: var(--text-secondary);
